@@ -1,0 +1,32 @@
+Todo
+
+- [x] typescript で記述する
+- [x] table 作成
+- [x] insert, update, delete
+- [x] bulkCreate について, bulkUpdate もそうだ。
+- [] select
+  - [] group by(one table & association)
+  - [] case when
+  - [] complex filter
+  - [] subqury をむりやりつかう
+    - [] 無理やり開ける方法を知らないといけない。
+  - [] sequelize.literal
+  - [] sequelize.fn(literal と組み合わせる)
+  - [] having(where 句をつくる)
+- [] assciation
+  - [] belongsTo
+  - [] hasMany
+  - [] hasOne
+  - [] belongsToMany
+  - [x] create asscociate
+        -> 行けるけど使えないね。transaction したほうがよい
+- [] transaction
+- [] migration
+- [] hooks
+  - [] Declaring Hooks(3 patterns)
+  - [] Removing hooks
+  - [] Global hooks
+  - [] With Transaction
+- [] validation
+- [x] github に学習用 repository をつくる
+- [x] テストコードというのか学習コードとして repository を公開できないかな?
