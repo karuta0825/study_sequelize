@@ -7,7 +7,6 @@ jobs:
       - checkout
       - run: npm install
       - run: echo "hello world"
-
   test:
     steps:
-    - run: npm test
+      - run: npm test
