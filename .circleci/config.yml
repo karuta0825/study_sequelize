@@ -5,5 +5,5 @@ jobs:
       - image: circleci/node:12
     steps:
       - checkout
-      - run: npm run install
+      - run: npm install
       - run: echo "hello world"
