@@ -17,3 +17,11 @@ jobs:
       name: default
     steps:
       - run: npm test
+
+workflows:
+  setup_and_deploy:
+    jobs:
+      - build
+      - test
+
+    
