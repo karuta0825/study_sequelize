@@ -20,11 +20,10 @@ jobs:
       - run: npm test
 
 workflows:
-  version: 2
   setup_and_deploy:
     jobs:
       - setup
       - test:
-          - requires:
-              - build
+          requires:
+            - setup
 
