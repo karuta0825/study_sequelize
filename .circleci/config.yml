@@ -14,7 +14,7 @@ jobs:
       - run: echo "hello world"
       # jobを超えて保存する
       - persist_to_workspace:
-          root: /
+          root: .
           paths:
           - 'node_modules'
   test:
@@ -29,6 +29,7 @@ workflows:
     jobs:
       - setup
       - test:
+          # 以下のjobの完了後に実行する
           requires:
             - setup
 
