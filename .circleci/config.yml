@@ -5,7 +5,7 @@ executors:
     docker:
       - image: circleci/node:12
 jobs:
-  build:
+  setup:
     executor:
       name: default
     steps:
@@ -22,9 +22,7 @@ jobs:
 workflows:
   setup_and_deploy:
     jobs:
-      - build
+      - setup
       - test:
         requires:
           - build
-
-    
