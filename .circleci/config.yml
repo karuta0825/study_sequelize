@@ -1,4 +1,12 @@
 version: 2.1
+
+references:
+  workspace_root: &workspace_root
+      ~/workspace
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
 executors:
   default:
     working_directory: ~/workspace
@@ -14,7 +22,7 @@ jobs:
       - run: echo "hello world"
       # jobを超えて保存する
       - persist_to_workspace:
-          root: .
+          root: *workspace_root
           paths:
           - 'node_modules'
   test:
@@ -22,6 +30,7 @@ jobs:
       name: default
     steps:
       - checkout
+      - *attach_workspace
       - run: npm test
 
 workflows:
