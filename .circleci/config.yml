@@ -12,6 +12,11 @@ jobs:
       - checkout
       - run: npm install
       - run: echo "hello world"
+      # jobを超えて保存する
+      - persist_to_workspace:
+          root: /
+          paths:
+          - 'node_modules'
   test:
     executor:
       name: default
