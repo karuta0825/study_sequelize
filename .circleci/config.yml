@@ -16,6 +16,7 @@ jobs:
     executor:
       name: default
     steps:
+      - checkout
       - run: npm test
 
 workflows:
