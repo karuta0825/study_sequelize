@@ -29,7 +29,7 @@ jobs:
        # persist_to_workspaceで保存したデータをatのパスにダウンロードする
       - attach_workspace:
           at: .
-      - run: npm test
+      # - run: npm test
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary
