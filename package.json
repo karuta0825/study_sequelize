@@ -12,6 +12,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "setupFilesAfterEnv": [
+    "jest-allure/dist/setup"
+  ],
   "dependencies": {
     "mysql2": "^1.6.5",
     "sequelize": "^5.10.0",
@@ -30,6 +33,8 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.8.0",
+    "jest-allure": "^0.1.1",
+    "jest-junit": "^11.1.0",
     "nodemon": "^1.19.1",
     "power-assert": "^1.6.1",
     "prettier": "^1.18.2",

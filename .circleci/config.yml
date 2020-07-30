@@ -30,10 +30,11 @@ jobs:
       - attach_workspace:
           at: .
       # - run: npm test
+      - run: npm i -D jest-junit
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary
-          command: yarn jest -- --ci --testResultsProcessor="jest-junit"
+          command: npx jest --ci --testResultsProcessor="jest-junit"
           environment:
             JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
       - store_test_results:

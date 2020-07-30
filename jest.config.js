@@ -47,18 +47,24 @@ module.exports = {
   // forceCoverageMatch: [],
 
   // A path to a module which exports an async function that is triggered once before all test suites
-  // globalSetup: null,
+  globalSetup: '<rootDir>/setup.js',
 
   // A path to a module which exports an async function that is triggered once after all test suites
   // globalTeardown: null,
 
   // A set of global variables that need to be available in all test environments
   globals: {
+    MYDB: 'https://',
+    // process: {
+    //   env: {
+    //     MY: 'aaa',
+    //   },
+    // },
     'ts-jest': {
       babelConfig: {
-        presets: ['power-assert']
-      }
-    }
+        presets: ['power-assert'],
+      },
+    },
   },
 
   // An array of directory names to be searched recursively up from the requiring module's location
@@ -89,6 +95,7 @@ module.exports = {
 
   // Use this configuration option to add custom reporters to Jest
   // reporters: undefined,
+  reporters: ['default', 'jest-junit'],
 
   // Automatically reset mock state between every test
   // resetMocks: false,
@@ -106,7 +113,7 @@ module.exports = {
   // rootDir: null,
 
   // A list of paths to directories that Jest should use to search for files in
-  // roots: ["<rootDir>"],
+  roots: ['<rootDir>'],
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
@@ -167,7 +174,7 @@ module.exports = {
   // unmockedModulePathPatterns: undefined,
 
   // Indicates whether each individual test should be reported during the run
-  verbose: true
+  verbose: true,
 
   // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
   // watchPathIgnorePatterns: [],
