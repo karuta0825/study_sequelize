@@ -36,11 +36,12 @@ jobs:
           command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - run: npx allure generate allur-results -o html/allure-results
       - store_test_results:
           path: ./reports/junit/
       # カバレッジ情報をairtifactに保存する
       - store_artifacts:
-          path: ./coverage
+          path: ./html/allure-results
 
 workflows:
   setup_and_deploy:
