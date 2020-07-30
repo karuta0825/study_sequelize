@@ -1,8 +1,13 @@
 import * as assert from 'power-assert';
 import { db, sequelize } from '../src/models';
-import { Hooks } from 'sequelize/types/lib/hooks';
+import 'jest-allure/dist/setup';
+import Person from '../src/models/sample';
 
-const { Project } = db;
+it('test', () => {
+  const p = new Person('adam', 10);
+  // const actual = p.call();
+  assert.deepEqual('adam', {d: 'adam'});
+});
 
 describe('Project Model', () => {
   beforeEach(async () => {
