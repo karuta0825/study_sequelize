@@ -1,5 +1,6 @@
 version: 2.1
 
+# 全フローを通してアクセスできる変数
 references:
   workspace_root: &workspace_root
       ~/workspace
@@ -7,22 +8,25 @@ references:
     attach_workspace:
       at: *workspace_root
 
+# 共通化部分
 executors:
   default:
     working_directory: ~/workspace
     docker:
       - image: circleci/node:12
+
 jobs:
   setup:
     executor:
       name: default
     steps:
+      # git pullする
       - checkout
       - run: npm install
       - run: echo "hello world"
       # jobを超えて保存する
       - persist_to_workspace:
-          root: *workspace_root
+          root: .
           paths:
           - 'node_modules'
   test:
@@ -30,7 +34,8 @@ jobs:
       name: default
     steps:
       - checkout
-      - *attach_workspace
+      - attach_workspace:
+          at: ./node_modules
       - run: npm test
 
 workflows:
