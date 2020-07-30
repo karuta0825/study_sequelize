@@ -28,14 +28,14 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-          - .
+          - 'node_modules'
   test:
     executor:
       name: default
     steps:
       - checkout
       - attach_workspace:
-          at: ./node_modules
+          at: .
       - run: npm test
 
 workflows:
