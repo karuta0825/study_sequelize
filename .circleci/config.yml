@@ -1,13 +1,5 @@
 version: 2.1
 
-# 全フローを通してアクセスできる変数
-references:
-  workspace_root: &workspace_root
-      ~/workspace
-  attach_workspace: &attach_workspace
-    attach_workspace:
-      at: *workspace_root
-
 # 共通化部分
 executors:
   default:
@@ -24,7 +16,7 @@ jobs:
       - checkout
       - run: npm install
       - run: echo "hello world"
-      # jobを超えて保存する
+      # jobを超えて使いまわしたものをroot/pathsに保存する
       - persist_to_workspace:
           root: .
           paths:
@@ -34,9 +26,24 @@ jobs:
       name: default
     steps:
       - checkout
+       # persist_to_workspaceで保存したデータをatのパスにダウンロードする
       - attach_workspace:
           at: .
       - run: npm test
+      - run:
+          name: ダミー アーティファクトの作成
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+
+      - store_artifacts:
+          path: /tmp/artifacts
+
 
 workflows:
   setup_and_deploy:
