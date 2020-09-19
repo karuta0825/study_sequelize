@@ -37,7 +37,7 @@ jobs:
        # persist_to_workspaceで保存したデータをatのパスにダウンロードする
       - attach_workspace:
           at: .
-      # - allure/install
+      - allure/install
       - run:
           name: "Install Java"
           command: sudo apt-get install openjdk-8-jdk
