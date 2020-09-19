@@ -64,8 +64,8 @@ jobs:
           target-path: './html/allure-results'
           results-path: 'allure-results'
       # カバレッジ情報をairtifactに保存する
-      - store_artifacts:
-          path: ./html/allure-results
+      # - store_artifacts:
+      #     path: ./html/allure-results
 
 
 workflows:
