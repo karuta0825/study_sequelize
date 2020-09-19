@@ -39,6 +39,8 @@ jobs:
       - attach_workspace:
           at: .
       # - run: npm test
+      - run: java -version
+      - run: allure -h
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary
@@ -74,7 +76,7 @@ workflows:
       - test:
           # 以下のjobの完了後に実行する
           requires:
-            - allure
+            - setup
       - allure:
           requires:
-            - setup
+            - test
