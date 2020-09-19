@@ -9,6 +9,7 @@ executors:
   default:
     working_directory: ~/workspace
     docker:
+      - image: circleci/openjdk:8-jdk
       - image: circleci/node:12
   java:
     working_directory: ~/workspace
