@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  allure: ayte/allure@0.1.3
+
 # 共通化部分
 executors:
   default:
@@ -30,6 +33,7 @@ jobs:
       - attach_workspace:
           at: .
       # - run: npm test
+      - allure/install
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary
@@ -51,4 +55,3 @@ workflows:
           # 以下のjobの完了後に実行する
           requires:
             - setup
-
