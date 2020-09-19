@@ -10,7 +10,6 @@ executors:
     working_directory: ~/workspace
     docker:
       - image: circleci/node:12
-      - image: circleci/openjdk:8-jdk
   java:
     working_directory: ~/workspace
     docker:
@@ -39,8 +38,6 @@ jobs:
       - attach_workspace:
           at: .
       # - run: npm test
-      - run: java -version
-      - run: allure -h
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary

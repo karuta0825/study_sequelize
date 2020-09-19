@@ -6,7 +6,7 @@ import Person from '../src/models/sample';
 it('test', () => {
   const p = new Person('adam', 10);
   // const actual = p.call();
-  assert.deepEqual('adam', {d: 'adam'});
+  assert.deepEqual('adam', { d: 'adam' });
 });
 
 describe('Project Model', () => {
@@ -22,19 +22,19 @@ describe('Project Model', () => {
 
       const project = db.Project.build({
         title,
-        description
+        description,
       });
 
       await project.save();
       const rawProjects = await db.Project.findAll({
-        attributes: ['id', 'title', 'description']
+        attributes: ['id', 'title', 'description'],
       });
-      const [actual]: any = rawProjects.map(d => d.toJSON());
+      const [actual]: any = rawProjects.map((d) => d.toJSON());
 
       const expect = {
         id: 1,
         title,
-        description
+        description,
       };
       assert.deepEqual(actual, expect);
     });
@@ -47,7 +47,7 @@ describe('Project Model', () => {
           projectId: project.id,
           title: 'hooks',
           description: 'hooks',
-          deadline: new Date()
+          deadline: new Date(),
         });
       });
     });
@@ -57,11 +57,11 @@ describe('Project Model', () => {
     });
 
     it('use hooks', async () => {
-      await sequelize.transaction(transaction => {
+      await sequelize.transaction((transaction) => {
         return db.Project.create(
           {
             title: 'project',
-            description: 'project'
+            description: 'project',
           },
           { transaction }
         );
@@ -72,12 +72,12 @@ describe('Project Model', () => {
         include: [
           {
             attributes: ['id', 'title', 'description', 'deadline'],
-            model: db.Task
-          }
-        ]
+            model: db.Task,
+          },
+        ],
       });
 
-      const [acutal] = rawProjects.map(d => d.toJSON());
+      const [acutal] = rawProjects.map((d) => d.toJSON());
       assert.deepEqual(acutal, {});
     });
   });

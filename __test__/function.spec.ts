@@ -1,5 +1,4 @@
 import * as assert from 'power-assert';
-import { test } from '../src/func';
 
 // describe("func", () => {
 //   it('h関数呼び出し', () => {
@@ -26,7 +25,7 @@ import { test } from '../src/func';
 const table = [
   [1, 1, 2, 'case1'],
   [1, 2, 3, 'case2'],
-  [2, {}, 3, 'case3'],
+  [2, 1, 3, 'case3'],
 ];
 
 it.each(table)('.add(%i, %i)', (a: number, b: number, expected, casename) => {
@@ -39,11 +38,3 @@ for (const [a, b, e, n] of table as any) {
     assert.equal(a + b, e);
   });
 }
-
-it('test', () => {
-  // console.log(process.env);
-  // console.log(process.env.MYDB);
-  // console.log(process.env.MYSAMPLE);
-
-  assert(test() === 2);
-});
