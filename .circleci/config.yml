@@ -43,7 +43,7 @@ jobs:
           command: sudo apt-get install openjdk-8-jdk
       - run:
           name: "Install Allure"
-          command: sudo apt-get install allure
+          command: sudo apt-get install allure-commandline
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary
