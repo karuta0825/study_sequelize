@@ -52,7 +52,6 @@ jobs:
       - allure/report:
           target-path: './html/allure-results'
           results-path: 'allure-results'
-          when: always
 
       - store_test_results:
           path: ./reports/junit/
