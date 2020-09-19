@@ -41,7 +41,10 @@ jobs:
           command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit --detectOpenHandles
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
-      - run: npx allure generate allure-results -o html/allure-results
+      - run:
+          name: 'allure'
+          command: npx allure generate allure-results -o html/allure-results
+          when: always
       # - run:
       #     name: "report Allure"
       #     command: allure generate allure-results -o html/allure-results
@@ -49,6 +52,7 @@ jobs:
       - allure/report:
           target-path: './html/allure-results'
           results-path: 'allure-results'
+          when: always
 
       - store_test_results:
           path: ./reports/junit/
