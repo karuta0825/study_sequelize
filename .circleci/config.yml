@@ -37,7 +37,7 @@ jobs:
        # persist_to_workspaceで保存したデータをatのパスにダウンロードする
       - attach_workspace:
           at: .
-      - allure/install
+      # - allure/install
       - run:
           name: "Install Java"
           command: sudo apt-get install openjdk-8-jdk
@@ -50,18 +50,18 @@ jobs:
           command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
-#      - run: npx allure generate allure-results -o html/allure-results
+      - run: npx allure generate allure-results -o html/allure-results
       # - persist_to_workspace:
       #     root: .
       #     paths:
       #     - 'allure-results'
-      - run:
-          name: "report Allure"
-          command: allure generate allure-results -o html/allure-results
+      # - run:
+      #     name: "report Allure"
+      #     command: allure generate allure-results -o html/allure-results
 
-      # - allure/report:
-      #     target-path: './html/allure-results'
-      #     results-path: 'allure-results'
+      - allure/report:
+          target-path: './html/allure-results'
+          results-path: 'allure-results'
 
       - store_test_results:
           path: ./reports/junit/
