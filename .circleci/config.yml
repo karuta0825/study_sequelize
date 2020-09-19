@@ -37,7 +37,11 @@ jobs:
        # persist_to_workspaceで保存したデータをatのパスにダウンロードする
       - attach_workspace:
           at: .
-      # - run: npm test
+      - allure/install
+      - run:
+          name: "Install Java"
+          command: sudo apt-get install openjdk-8-jdk
+      - run: java -version
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary
@@ -45,12 +49,17 @@ jobs:
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
 #      - run: npx allure generate allure-results -o html/allure-results
-      - persist_to_workspace:
-          root: .
-          paths:
-          - 'allure-results'
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #     - 'allure-results'
+      - allure/report:
+          target-path: './html/allure-results'
+          results-path: 'allure-results'
+
       - store_test_results:
           path: ./reports/junit/
+
   allure:
     executor:
       name: java
@@ -76,6 +85,6 @@ workflows:
           # 以下のjobの完了後に実行する
           requires:
             - setup
-      - allure:
-          requires:
-            - test
+      # - allure:
+      #     requires:
+      #       - test
