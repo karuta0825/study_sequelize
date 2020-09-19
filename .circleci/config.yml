@@ -15,7 +15,7 @@ commands:
       - run: sudo apt-get install openjdk-8-jdk
   allure_install:
     steps:
-      - run: curl -L https://github.com/allure-framework/allure2/releases/download/<< parameters.version >>/allure-commandline-<< parameters.version >>.zip -o /tmp/allure.zip
+      - run: curl -L https://github.com/allure-framework/allure2/releases/download/2.13.1/allure-commandline-2.13.1.zip -o /tmp/allure.zip
       - run: unzip /tmp/allure.zip
       - run: sudo mv allure-<< parameters.version >> /usr/local/share/allure
       - run: sudo ln -s /usr/local/share/allure/bin/allure /usr/local/bin/allure
