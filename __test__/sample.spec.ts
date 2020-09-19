@@ -15,6 +15,10 @@ describe('Project Model', () => {
     await db.Task.sync({ force: true });
   });
 
+  afterAll((done) => {
+    done();
+  });
+
   describe('create', () => {
     it('insert作成', async () => {
       const title = 'my awesome project';
@@ -52,8 +56,9 @@ describe('Project Model', () => {
       });
     });
 
-    afterAll(() => {
+    afterAll((done) => {
       db.Project.removeHook('afterCreate', 'afterCreate');
+      done();
     });
 
     it('use hooks', async () => {
