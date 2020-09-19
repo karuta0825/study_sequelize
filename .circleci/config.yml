@@ -38,7 +38,7 @@ jobs:
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary
-          command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit
+          command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit --detectOpenHandles
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
       - run: npx allure generate allure-results -o html/allure-results
