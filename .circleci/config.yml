@@ -10,12 +10,12 @@ executors:
 
 # step処理
 commands:
-  java-install:
+  java_install:
     steps:
       - run:
         name: "Install Java"
         command: sudo apt-get install openjdk-8-jdk
-  allure-install:
+  allure_install:
     steps:
       - run:
           name: Allure archive download
@@ -51,8 +51,8 @@ jobs:
        # persist_to_workspaceで保存したデータをatのパスにダウンロードする
       - attach_workspace:
           at: .
-      - java-install
-      - allure-install
+      - java_install
+      - allure_install
       # - run:
       #     name: "Install Java"
       #     command: sudo apt-get install openjdk-8-jdk
