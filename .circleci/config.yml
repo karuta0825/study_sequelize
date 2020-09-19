@@ -10,7 +10,10 @@ executors:
     working_directory: ~/workspace
     docker:
       - image: circleci/node:12
-      - image: circleci/openjdk:8-jdk
+  java:
+    working_directory: ~/workspace
+    docker:
+    - image: circleci/openjdk:8-jdk
 
 jobs:
   setup:
@@ -35,19 +38,33 @@ jobs:
       - attach_workspace:
           at: .
       # - run: npm test
-      - allure/install
       - run:
           name: "JavaScript Test Suite"
           # yarn here makes sure we are using the local jest binary
           command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
-      - run: npx allure generate allure-results -o html/allure-results
+#      - run: npx allure generate allure-results -o html/allure-results
+      - persist_to_workspace:
+          root: .
+          paths:
+          - 'allure-results'
       - store_test_results:
           path: ./reports/junit/
+  allure:
+    executor:
+      name: java
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - allure/install
+      - run: java -version
+      - run: allure -h
       # カバレッジ情報をairtifactに保存する
       - store_artifacts:
           path: ./html/allure-results
+
 
 workflows:
   setup_and_deploy:
@@ -57,3 +74,6 @@ workflows:
           # 以下のjobの完了後に実行する
           requires:
             - setup
+      - allure:
+          requires:
+            - test
