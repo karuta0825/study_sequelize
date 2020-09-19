@@ -73,7 +73,7 @@ workflows:
       - test:
           # 以下のjobの完了後に実行する
           requires:
-            - setup
+            - allure
       - allure:
           requires:
-            - test
+            - setup
