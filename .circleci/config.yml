@@ -60,7 +60,9 @@ jobs:
           at: .
       - allure/install
       - run: java -version
-      - run: allure -h
+      - allure/report
+        target-path: 'allure-results'
+        results-path: './html/allure-results'
       # カバレッジ情報をairtifactに保存する
       - store_artifacts:
           path: ./html/allure-results
