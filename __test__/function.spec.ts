@@ -1,5 +1,5 @@
 import * as assert from 'power-assert';
-
+import 'jest-allure/dist/setup';
 // describe("func", () => {
 //   it('h関数呼び出し', () => {
 //     assert(h() === 'h');
