@@ -12,7 +12,7 @@ executors:
 commands:
   java-install:
     steps:
-      - run
+      - run:
         name: "Install Java"
         command: sudo apt-get install openjdk-8-jdk
   allure-install:
