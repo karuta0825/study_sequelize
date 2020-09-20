@@ -1,5 +1,39 @@
 version: 2.1
 
+orbs:
+  allure:
+    commands:
+      install:
+        description: Installs Allure Framework and registers it as /usr/local/bin/allure
+        parameters:
+          version:
+            description: Allure version to use
+            type: string
+            default: 2.13.1
+        steps:
+          - run:
+              name: Java install
+              command: sudo apt-get install openjdk-8-jdk
+          - run:
+              name: Allure archive download
+              command: curl -L https://github.com/allure-framework/allure2/releases/download/<< parameters.version >>/allure-commandline-<< parameters.version >>.zip -o /tmp/allure.zip
+          - run:
+              name: Archive extraction
+              command: unzip /tmp/allure.zip
+          - run:
+              name: Allure installation
+              command: sudo mv allure-<< parameters.version >> /usr/local/share/allure
+          - run:
+              name: Allure binary symlinking
+              command: sudo ln -s /usr/local/share/allure/bin/allure /usr/local/bin/allure
+      report:
+        description: report
+        steps:
+          - run:
+              name: report
+              command: allure generate allure-results -o html/allure-results
+              when: always
+
 # 共通化部分
 # 実行環境
 executors:
@@ -41,8 +75,8 @@ jobs:
        # persist_to_workspaceで保存したデータをatのパスにダウンロードする
       - attach_workspace:
           at: .
-      - java_install
-      - allure_install
+      # - java_install
+      # - allure_install
       # - run:
       #     name: "Install Java"
       #     command: sudo apt-get install openjdk-8-jdk
@@ -52,10 +86,10 @@ jobs:
           command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit --detectOpenHandles
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
-      - run:
-          name: "allure output"
-          command: allure generate allure-results -o html/allure-results
-          when: always
+      # - run:
+      #     name: "allure output"
+      #     command: allure generate allure-results -o html/allure-results
+      #     when: always
       # - run:
       #     name: 'allure'
       #     command: npx allure generate allure-results -o html/allure-results
@@ -67,6 +101,9 @@ jobs:
 
       - store_test_results:
           path: ./reports/junit/
+
+      - allure/install
+      - allure/report
 
       # カバレッジ情報をairtifactに保存する
       - store_artifacts:
