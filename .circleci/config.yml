@@ -75,7 +75,7 @@ jobs:
        # persist_to_workspaceで保存したデータをatのパスにダウンロードする
       - attach_workspace:
           at: .
-     - allure/install
+      - allure/install
       # - java_install
       # - allure_install
       # - run:
